@@ -1,0 +1,18 @@
+.header{  
+    display: flex;
+    justify-content: space-between;
+    background-color: #428380;
+}
+
+.logo{
+    padding: 30px;
+    padding-left: 90px;
+    margin: 0;
+}
+
+.menu{
+    display: flex;
+    gap:50px;
+    padding-right: 95px;
+    align-items: center;
+}
