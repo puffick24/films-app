@@ -6,6 +6,12 @@ const Poster = ({films,loading}) => {
     }
 
 
+
+
+
+
+    
+
     return(
         <ul className={style.list}>
             <li className={style.poster}>               
