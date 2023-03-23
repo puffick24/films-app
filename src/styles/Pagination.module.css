@@ -1,0 +1,20 @@
+.pagination ul{
+    padding-top: 80px;
+    display: flex;
+    justify-content: center;
+    gap:10px; 
+}
+
+.pagination ul li{
+    width: 40px;
+    height: 40px;
+    border: 2px solid black;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination ul li:hover{
+    border: #45A29E solid;
+}
