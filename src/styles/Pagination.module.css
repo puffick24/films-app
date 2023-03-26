@@ -1,5 +1,5 @@
 .pagination ul{
-    padding-top: 80px;
+    padding: 50px 0 40px;
     display: flex;
     justify-content: center;
     gap:10px; 
