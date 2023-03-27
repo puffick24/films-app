@@ -1,6 +1,6 @@
 import style from '../../../styles/Header.module.css'
 
-function Header(){
+const Header = () => {
     return(
         <header className={style.header}>
             <h1 className={style.logo}>Movies</h1>
