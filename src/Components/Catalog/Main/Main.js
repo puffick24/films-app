@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 
 import style from '../../../styles/Main.module.css'
 
-import Poster from '../Poster/Poster';
+import FilmsList from '../FilmsList/FilmsList';
 import Paginations from '../Pagination/Pagination'
 import { keys } from '../../../keys';
 
@@ -18,12 +18,8 @@ const Main = () => {
     useEffect(() => {
 
         const getFilms = async () => {
-            let endpoints = []
+            let endpoints = keys.slice(firstFilmIndex,lastFilmIndex)
             setLoading(true)          
-
-            for( let i = firstFilmIndex; i < lastFilmIndex; i++){
-                endpoints.push(keys[i])
-            }
             Promise.all(endpoints.map((endpoint) => axios.get(`http://www.omdbapi.com/?i=${endpoint}&apikey=fb59bcb5`)))
             .then(response => {
                     const results = response.map(result => {
@@ -33,8 +29,7 @@ const Main = () => {
                             year: result.data.Year
                         }               
                     })
-                    setFilms(results)
-    
+                    setFilms(results)    
                 }
             )
             .catch(
@@ -54,7 +49,7 @@ const Main = () => {
 
     return(
         <main className={style.main}>
-            <Poster films = {films} loading = {loading}/>
+            <FilmsList films = {films} loading = {loading}/>
             <Paginations 
                 filmsPerPage = {filmsPerPage} 
                 totalFilms={keys.length}
