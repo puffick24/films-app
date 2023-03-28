@@ -1,16 +1,35 @@
-import { Link } from 'react-router-dom';
+import { Link , useLocation} from 'react-router-dom';
 import style from '../../../styles/Header.module.css'
 
-const Header = (currentPage) => {
+const Header = () => {
+
+    const location = useLocation();
+
+    let links = [];
+
+    if (location.pathname === '/') {
+        links = [
+        { to: '#', label: 'Search' },
+        { to: '#', label: 'Create' },
+        ];
+    } else {
+        links = [
+        { to: '/', label: 'Main' }
+        ];
+    }
 
     return(
         <header className={style.header}>
             <h1 className={style.logo}>Movies</h1>
-            <div className={style.menu}>
-                <Link to="#">Search</Link>
+            <nav className={style.menu}>
+                {links.map((link) => (
+                <Link to={link.to}>{link.label}</Link>
+          ))}
+
+                {/* <Link to="#">Search</Link>
                 <Link to="#">Create</Link>
-                <Link to="/">Main</Link>
-            </div>
+                <Link to="/">Main</Link> */}
+            </nav>
         </header>
     )
         
