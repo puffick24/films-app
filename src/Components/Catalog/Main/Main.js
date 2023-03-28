@@ -12,7 +12,7 @@ import { keys } from '../../../keys';
 const Main = () => {
     const [films,setFilms] = useState([])
     const [filmsPerPage] = useState(8)
-    const [currentPage, setCurrentPage] = useState(1)
+    const [currentFilmsPage, setCurrentFilmsPage] = useState(1)
     const [loading,setLoading] = useState(false)
     
     useEffect(() => {
@@ -24,9 +24,11 @@ const Main = () => {
             .then(response => {
                     const results = response.map(result => {
                         return {
+                            
                             title: result.data.Title,
                             poster: result.data.Poster,
-                            year: result.data.Year
+                            year: result.data.Year,
+                            id: result.data.imdbID
                         }               
                     })
                     setFilms(results)    
@@ -39,13 +41,13 @@ const Main = () => {
         }
         
         getFilms()
-    },[currentPage])
+    },[currentFilmsPage])
 
     
-    const lastFilmIndex = Math.min(currentPage * filmsPerPage, keys.length);
-    const firstFilmIndex = (currentPage - 1) * filmsPerPage
+    const lastFilmIndex = Math.min(currentFilmsPage * filmsPerPage, keys.length);
+    const firstFilmIndex = (currentFilmsPage - 1) * filmsPerPage
 
-    const paginate = pageNum => setCurrentPage(pageNum)
+    const paginate = pageNum => setCurrentFilmsPage(pageNum)
 
     return(
         <main className={style.main}>
@@ -54,7 +56,7 @@ const Main = () => {
                 filmsPerPage = {filmsPerPage} 
                 totalFilms={keys.length}
                 paginate = {paginate}
-                currentPage = {currentPage }
+                currentPage = {currentFilmsPage }
             />
         </main>
     )

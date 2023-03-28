@@ -9,10 +9,10 @@ const FilmsList = ({films,loading}) => {
     return(
         <ul className={style.list}>
             {
-                films.map((film,i) => (
+                films.map((film, i) => (
                     <Film 
                     film = {film}
-                    i = {i}
+                    key = {i}
                     />
                 ))
             }

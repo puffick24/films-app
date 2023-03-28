@@ -1,12 +1,15 @@
+import { Link } from 'react-router-dom';
 import style from '../../../styles/Header.module.css'
 
-const Header = () => {
+const Header = (currentPage) => {
+
     return(
         <header className={style.header}>
             <h1 className={style.logo}>Movies</h1>
             <div className={style.menu}>
-                <p><a href='#'>Search</a></p>
-                <p><a href='#'>Create</a></p>
+                <Link to="#">Search</Link>
+                <Link to="#">Create</Link>
+                <Link to="/">Main</Link>
             </div>
         </header>
     )
