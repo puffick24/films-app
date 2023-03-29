@@ -6,7 +6,7 @@ const NotFoundPage = () => {
     return ( 
         <div className={style.container}>
             <img src = {NotFoundImg}></img>
-            <p>Page not found</p>
+            <h1>Page not found</h1>
             <p>Oops! The page you were looking for doesn't exist.</p>
         </div>
      );

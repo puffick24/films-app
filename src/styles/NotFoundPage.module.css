@@ -4,10 +4,16 @@
     justify-content: center;
     align-items: center;
     font-size: 36px;
+    color:#fff;
 }
 
 .container img{
     padding: 190px 0 10px;
+}
+
+h1{
+    font-weight: 700;
+    font-weight:bold;
 }
 
 .container p {
