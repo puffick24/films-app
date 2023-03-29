@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+}
+
+.container img{
+    padding: 190px 0 10px;
+}
+
+.container p {
+    padding: 10px;
+}

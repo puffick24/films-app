@@ -9,13 +9,14 @@ const Header = () => {
 
     if (location.pathname === '/') {
         links = [
-        { to: '#', label: 'Search' },
-        { to: '#', label: 'Create' },
+        { to: '/search', label: 'Search' },
+        { to: '/create', label: 'Create' },
         ];
     } else {
         links = [
         { to: '/', label: 'Main' }
         ];
+        
     }
 
     return(
@@ -25,10 +26,6 @@ const Header = () => {
                 {links.map((link) => (
                 <Link to={link.to}>{link.label}</Link>
           ))}
-
-                {/* <Link to="#">Search</Link>
-                <Link to="#">Create</Link>
-                <Link to="/">Main</Link> */}
             </nav>
         </header>
     )
