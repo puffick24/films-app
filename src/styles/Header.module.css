@@ -11,9 +11,15 @@
     margin: 0;
 }
 
-.menu{
+.menu {
     display: flex;
     gap:50px;
     padding-right: 95px;
+    align-items: center;
+}
+
+.menu div{
+    display: flex;
+    gap:50px;
     align-items: center;
 }

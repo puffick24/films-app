@@ -12,19 +12,22 @@ const FilmPage = () => {
   const [filmInfo,setFilmInfo] = useState({})
   const [ratings, setRatings] = useState([])
 
-  useEffect(() => {
-
-    const getFilmInfo = async () => {
+  const getFilmInfo = async () => {
+    try{
       setLoading(true)
-      axios.get(`http://www.omdbapi.com/?i=${id}&apikey=fb59bcb5`)
-      .then(response => {
-        setFilmInfo(response.data)
-        setRatings(response.data.Ratings)
-      })
-      .catch(error => console.log(error.message))
-    
+      const res = await axios.get(`http://www.omdbapi.com/?i=${id}&apikey=fb59bcb5`)
+      setFilmInfo(res.data)
+      setRatings(res.data.Ratings)
       setLoading(false)
+      
     }
+    catch(error){
+      console.log(`${error.name}: ${error.message}`)
+    }    
+    
+  }
+
+  useEffect(() => {
     getFilmInfo()
   },[])
 
@@ -58,7 +61,7 @@ const FilmPage = () => {
               ))
               } 
           </div>
-          <div className={style.edit_block}><button className={style.edit}><a href = "#">Edit</a></button></div>
+          <div className={style.edit_block}><button className={style.edit}>Edit</button></div>
           <div className={style.production_info_block}>
               <hr color="#45A29E"/>
               <div>

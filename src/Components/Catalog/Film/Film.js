@@ -8,8 +8,8 @@ const Film = ({film}) => {
             <img className={style.image} src = {film.poster} alt = "Poster"/> 
             <p className={style.title}>{film.title}</p>
             <p className={style.year}>{film.year}</p>
-            <button className={style.info}><Link to= {`/FilmPage/${film.id}`}>Info</Link></button>
-            <button className={style.remove}><Link to='#'>Remove</Link></button>
+            <Link to= {`/FilmPage/${film.id}`} className={style.info}>Info</Link>
+            <Link to='/remove' className={style.remove}>Remove</Link>
         </li>
      );
 }

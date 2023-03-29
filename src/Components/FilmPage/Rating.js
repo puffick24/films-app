@@ -11,12 +11,16 @@ const StarRating = ({ rating }) => {
   for (let i = 0; i < 10; i++) {
     let starImg = inactiveStarImg;
 
-    if (i < fullStars) {
-      starImg = activeStarImg;
-    } else if (i === fullStars && decimal >= 0.8) {
-      starImg = activeStarImg;
-    } else if (i === fullStars && decimal >= 0.3) {
-      starImg = halfStarImg;
+    switch(true) {
+      case i < fullStars:
+        starImg = activeStarImg;
+        break
+      case i === fullStars && decimal >= 0.8:
+        starImg = activeStarImg;
+        break
+      case i === fullStars && decimal >= 0.3:
+        starImg = halfStarImg;
+        break
     }
     stars.push(
       <img
@@ -26,7 +30,7 @@ const StarRating = ({ rating }) => {
     );
   }
 
-  return <div>{stars}</div>;
+  return <div>{stars}</div>
 }
 
 export default StarRating;
