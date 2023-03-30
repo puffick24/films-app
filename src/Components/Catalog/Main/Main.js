@@ -12,40 +12,40 @@ import { keys } from '../../../keys';
 const Main = () => {
     const [films,setFilms] = useState([])
     const [filmsPerPage] = useState(8)
-    const [currentPage, setCurrentPage] = useState(1)
+    const [currentFilmsPage, setCurrentFilmsPage] = useState(1)
     const [loading,setLoading] = useState(false)
     
-    useEffect(() => {
-
-        const getFilms = async () => {
+    const getFilms = async () => {
+        try{
             let endpoints = keys.slice(firstFilmIndex,lastFilmIndex)
             setLoading(true)          
-            Promise.all(endpoints.map((endpoint) => axios.get(`http://www.omdbapi.com/?i=${endpoint}&apikey=fb59bcb5`)))
-            .then(response => {
-                    const results = response.map(result => {
-                        return {
-                            title: result.data.Title,
-                            poster: result.data.Poster,
-                            year: result.data.Year
-                        }               
-                    })
-                    setFilms(results)    
-                }
-            )
-            .catch(
-                error => {console.log(error.message)}
-            )    
-            setLoading(false)          
+            const res = await Promise.all(endpoints.map((endpoint) => axios.get(`http://www.omdbapi.com/?i=${endpoint}&apikey=fb59bcb5`)))
+            const results = res.map(result => {
+                return {
+                    
+                    title: result.data.Title,
+                    poster: result.data.Poster,
+                    year: result.data.Year,
+                    id: result.data.imdbID
+                }               
+            })
+            setFilms(results)
+            setLoading(false)
         }
-        
+        catch(error){
+            console.log(`${error.name}: ${error.message}`)
+        }                    
+    }
+
+    useEffect(() => { 
         getFilms()
-    },[currentPage])
+    },[currentFilmsPage])
 
     
-    const lastFilmIndex = Math.min(currentPage * filmsPerPage, keys.length);
-    const firstFilmIndex = (currentPage - 1) * filmsPerPage
+    const lastFilmIndex = Math.min(currentFilmsPage * filmsPerPage, keys.length);
+    const firstFilmIndex = (currentFilmsPage - 1) * filmsPerPage
 
-    const paginate = pageNum => setCurrentPage(pageNum)
+    const paginate = pageNum => setCurrentFilmsPage(pageNum)
 
     return(
         <main className={style.main}>
@@ -54,7 +54,7 @@ const Main = () => {
                 filmsPerPage = {filmsPerPage} 
                 totalFilms={keys.length}
                 paginate = {paginate}
-                currentPage = {currentPage }
+                currentPage = {currentFilmsPage }
             />
         </main>
     )
