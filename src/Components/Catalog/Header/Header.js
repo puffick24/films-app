@@ -14,7 +14,7 @@ const Header = () => {
                     mainUrl ? 
                     <div>
                         <Link to = '/search'>Search</Link>
-                        <Link to = '/remove'>Remove</Link>
+                        <Link to = '/create'>Create</Link>
                     </div>
                      : 
                     <Link to = '/'>Main</Link>
