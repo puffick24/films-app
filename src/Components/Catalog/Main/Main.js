@@ -19,10 +19,14 @@ const Main = () => {
     
     const getFilms = async () => {
         try{
-            setKeysState(keysState.filter((i) => i != delKeys))
-            let endpoints = keysState.filter((i) => i !== delKeys).slice(firstFilmIndex,lastFilmIndex)
-            setLoading(true)          
-            const res = await Promise.all(endpoints.map((endpoint) => axios.get(`http://www.omdbapi.com/?i=${endpoint}&apikey=fb59bcb5`)))
+            setLoading(true)
+            const newKeysState = keysState.filter((i) => i !== delKeys)
+            setKeysState(newKeysState)
+
+            const endpoints = newKeysState.slice(firstFilmIndex,lastFilmIndex)           
+            const request = endpoints.map((endpoint) => axios.get(`http://www.omdbapi.com/?i=${endpoint}&apikey=fb59bcb5`))
+            
+            const res = await Promise.all(request)
             const results = res.map(result => {
                 return {
                     
