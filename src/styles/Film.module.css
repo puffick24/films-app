@@ -28,7 +28,9 @@
 
 .remove{
     bottom:160px;
-    padding: 5px 23px;
+    padding: 7px 23px;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .poster:hover img{
@@ -40,6 +42,11 @@
 }
 
 .poster:hover a{
+    opacity: 1;
+    text-decoration: none;
+}
+
+.poster:hover button{
     opacity: 1;
 }
 

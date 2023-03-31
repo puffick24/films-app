@@ -14,12 +14,19 @@ const Main = () => {
     const [filmsPerPage] = useState(8)
     const [currentFilmsPage, setCurrentFilmsPage] = useState(1)
     const [loading,setLoading] = useState(false)
+    const [delKeys,setDelKeys] = useState([])
+    const [keysState,setKeysState] = useState(keys)
     
     const getFilms = async () => {
         try{
-            let endpoints = keys.slice(firstFilmIndex,lastFilmIndex)
-            setLoading(true)          
-            const res = await Promise.all(endpoints.map((endpoint) => axios.get(`http://www.omdbapi.com/?i=${endpoint}&apikey=fb59bcb5`)))
+            setLoading(true)
+            const newKeysState = keysState.filter((i) => i !== delKeys)
+            setKeysState(newKeysState)
+
+            const endpoints = newKeysState.slice(firstFilmIndex,lastFilmIndex)           
+            const request = endpoints.map((endpoint) => axios.get(`http://www.omdbapi.com/?i=${endpoint}&apikey=fb59bcb5`))
+            
+            const res = await Promise.all(request)
             const results = res.map(result => {
                 return {
                     
@@ -39,7 +46,7 @@ const Main = () => {
 
     useEffect(() => { 
         getFilms()
-    },[currentFilmsPage])
+    },[currentFilmsPage,delKeys])
 
     
     const lastFilmIndex = Math.min(currentFilmsPage * filmsPerPage, keys.length);
@@ -49,10 +56,10 @@ const Main = () => {
 
     return(
         <main className={style.main}>
-            <FilmsList films = {films} loading = {loading}/>
+            <FilmsList films = {films} loading = {loading} setFilms= {setFilms} keys={keys} setDelKeys= {setDelKeys}/>
             <Paginations 
                 filmsPerPage = {filmsPerPage} 
-                totalFilms={keys.length}
+                totalFilms={keysState.length}
                 paginate = {paginate}
                 currentPage = {currentFilmsPage }
             />
