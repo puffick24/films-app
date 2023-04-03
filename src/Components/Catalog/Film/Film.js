@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
 
-import style from '../../../styles/Film.module.css'
+import style from './Film.module.css'
 
-const Film = ({film,setModalActive,setFilmID}) => {
+const Film = ({film,getFilmIDHandle}) => {
 
-    const getFilmIDHandle = () => {
-        setModalActive(true)
-        setFilmID(film.id)
+    const getID = () => {
+        getFilmIDHandle(film.id)
     }
 
     return ( 
@@ -15,7 +14,7 @@ const Film = ({film,setModalActive,setFilmID}) => {
             <p className={style.title}>{film.title}</p>
             <p className={style.year}>{film.year}</p>
             <Link to= {`/FilmPage/${film.id}`} className={style.info}>Info</Link>
-            <button className={style.remove} onClick={getFilmIDHandle}>Remove</button>
+            <button className={style.remove} onClick={getID}>Remove</button>
         </li>
      );     
 }

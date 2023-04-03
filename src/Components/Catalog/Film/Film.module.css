@@ -15,7 +15,7 @@
     opacity: 0;
     border: 1px white solid ;
     border-radius: 15px;
-    background-color: #45A29E;
+    background-color:  var(--theme-color);
     color: white;
     position: relative;
 }

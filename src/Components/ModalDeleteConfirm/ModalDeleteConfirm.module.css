@@ -22,7 +22,7 @@
     width: 650px;
     height: 380px;
     background-color: #fff;
-    border: 1px solid #45A29E;
+    border: 1px solid var(--theme-color);
     border-radius: 20px;
     display: flex;
     justify-content: center;
@@ -58,9 +58,9 @@
     width: 200px;
     height: 60px;
     border-radius: 5px;
-    border: 1px solid #45A29E;
+    border: 1px solid var(--theme-color);
 }
 
 .delete{
-    background-color: #45A29E;
+    background-color: var(--theme-color);
 }
