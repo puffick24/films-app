@@ -11,6 +11,37 @@ const FilmPage = () => {
   const [loading,setLoading] = useState(false)
   const [filmInfo,setFilmInfo] = useState({})
   const [ratings, setRatings] = useState([])
+  const [isEditing, setIsEditing] = useState(false)
+  const [inputValue, setInputValue] = useState('')
+  const [field,setField] = useState('')
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setField(name)
+    setInputValue(value)
+  };
+
+  const editHandle = () => {
+    setIsEditing(true)
+  }
+
+  const saveHandle = () => { 
+    setIsEditing(false)
+    setFilmInfo((prevState) => ({
+      ...prevState,
+      [field]: inputValue,
+    }));
+  }
+
+  const renderField = (field,currValue,isEditing) => {
+    switch(true){     
+      case isEditing:
+        return <input name = {field} value = {currValue} onChange={handleInputChange}/>
+      case !isEditing:
+        return <span>{currValue}</span>
+    }
+     
+  }
 
   const getFilmInfo = async () => {
     try{
@@ -61,37 +92,46 @@ const FilmPage = () => {
               ))
               } 
           </div>
-          <div className={style.edit_block}><button className={style.edit}>Edit</button></div>
+          <div className={style.edit_block}>
+            {
+              isEditing ? <button className={style.edit} onClick = {saveHandle}>Save</button> : <button className={style.edit} onClick = {editHandle}>Edit</button>
+            }
+            </div>
           <div className={style.production_info_block}>
-              <hr color="#45A29E"/>
+              <hr color="#45A29E"/>      
               <div>
                 <span>Production</span>
-                <span>{filmInfo.Production}</span>
+                {renderField('Production',filmInfo.Production,isEditing)}
               </div>
               <hr color="#45A29E"/>
               <div>
                 <span>Country</span>
-                <span>{filmInfo.Country}</span>
+                {renderField('Country',filmInfo.Country,isEditing)}
+                {/* <span>{filmInfo.Country}</span> */}
               </div>
               <hr color="#45A29E"/>
               <div>
                 <span>Director</span>
-                <span>{filmInfo.Director}</span>
+                {renderField('Director',filmInfo.Director,isEditing)}
+                {/* <span>{filmInfo.Director}</span> */}
               </div>
               <hr color="#45A29E"/>
               <div>
                 <span>Writer</span>
-                <span>{filmInfo.Writer}</span>
+                {renderField('Writer',filmInfo.Writer,isEditing)}
+                {/* <span>{filmInfo.Writer}</span> */}
               </div>
               <hr color="#45A29E"/>
               <div>
                 <span>Actors</span>
-                <span>{filmInfo.Actors}</span>
+                {renderField('Actors',filmInfo.Actors,isEditing)}
+                {/* <span>{filmInfo.Actors}</span> */}
               </div>
               <hr color="#45A29E"/>
               <div>
                 <span>Awards</span>
-                <span>{filmInfo.Awards}</span>
+                {renderField('Awards',filmInfo.Awards,isEditing)}
+                {/* <span>{filmInfo.Awards}</span> */}
               </div>
               <hr color="#45A29E"/> 
           </div>
