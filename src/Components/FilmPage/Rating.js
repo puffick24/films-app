@@ -9,7 +9,7 @@ const StarRating = ({ rating }) => {
   const decimal = rating - fullStars;
   const stars = []
   
-  const Rating = () => {
+  const starRating = () => {
     for (let i = 0; i < 10; i++) {
       let Star = EmptyStar;
   
@@ -23,6 +23,8 @@ const StarRating = ({ rating }) => {
         case i === fullStars && decimal >= 0.3:
           Star = HalfStar;
           break
+        default:
+          Star = EmptyStar;
       }
       stars.push(
         <Star key = {i} alt = 'Star'/>
@@ -30,10 +32,8 @@ const StarRating = ({ rating }) => {
     }
     return <div>{stars}</div> 
   }
-  
 
-
-  return Rating()
+  return starRating()
   }
 
 export default StarRating;

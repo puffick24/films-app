@@ -15,7 +15,7 @@ const ModalDeleteConfirm = ({active,deleteFilm,setModalActive,filmID}) => {
     return ( 
         <div className={setModalStyle}>
             <div className={style.modal_content} >
-                <Сircle alt = 'Circle'/>
+                <Сircle/>
                 <h2>Are you sure ?</h2>
                 <p>Do you really want to remove this movie?<br/>This process cannot be undone.</p>
                 <div>

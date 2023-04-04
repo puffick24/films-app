@@ -23,9 +23,7 @@ const Main = () => {
     const pageNum = Math.ceil(keysState.length/filmsPerPage);
 
     const deleteFilm = (id) =>{
-        let copy = [...delKeys]
-        copy.push(id)
-        setDelKeys(copy)
+        setDelKeys([...delKeys, id])
         setModalActive(false)       
     }
 
