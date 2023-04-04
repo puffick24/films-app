@@ -1,6 +1,11 @@
+:root{
+    --bg-color:#3C3C3C;
+    --theme-color: #45A29E;
+}
+
 html{
     box-sizing: border-box;
-    background-color: #3C3C3C;
+    background-color: var(--bg-color);
 }
 
 body{   

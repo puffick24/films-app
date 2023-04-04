@@ -18,7 +18,12 @@
     padding-bottom: 10px;
 }
 
-.imdbRating{
+.rating{
+    display: flex;
+    gap:10px
+}
+
+.imdb_rating{
     padding-bottom: 30px;
 }
 
@@ -28,9 +33,8 @@
     text-align: center;
     padding-bottom: 30px;
 }
-
 .film_info_block div{
-    background-color: #45A29E;
+    background-color: var(--theme-color);
     padding: 6px 30px;
     border-radius: 5px;
     color: white;
@@ -46,7 +50,7 @@
 }
 
 .edit{
-    background-color: #45A29E;
+    background-color: var(--theme-color);
     padding: 6px 50px;
     border: 1px solid;
     border-radius: 5px;
@@ -64,13 +68,4 @@
     padding: 15px 0;
     display: flex;
     justify-content: space-between;
-}
-
-hr{
-    color:#45A29E;
-}
-
-.rating{
-    display: flex;
-    gap:10px
 }

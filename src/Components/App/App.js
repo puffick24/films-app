@@ -2,12 +2,12 @@ import React, { StrictMode } from 'react';
 
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
-import style from '../../styles/App.module.css'
+import style from './App.module.css'
 
-import Header from '../Catalog/Header/Header';
-import Main from '../Catalog/Main/Main';
-import FilmPage from '../FilmPage/FilmPage'
-import NotFoundPage from '../NotFoundPage/NotFoundPage'
+import Header from '../Catalog/Header';
+import Main from '../Catalog/Main';
+import FilmPage from '../FilmPage'
+import NotFoundPage from '../NotFoundPage'
 
 const App = () => {
 

@@ -2,8 +2,9 @@ import {useParams} from 'react-router-dom'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-import style from '../../styles/FilmPage.module.css';
+import style from './FilmPage.module.css';
 import Rating from './Rating'
+import InfoBlock from './InfoBlock';
 
 const FilmPage = () => {
   const {id} = useParams()
@@ -38,19 +39,19 @@ const FilmPage = () => {
   return (
       <div className = {style.container}>
         <div className={style.poster}>
-          <img src = {filmInfo.Poster} alt = 'Poster'></img>
+          <img src = {filmInfo.Poster} alt = 'Poster'/>
         </div>
         <div className={style.info}>
           <p className={style.title}>{filmInfo.Title}</p>
           <div className={style.rating}>
             <Rating rating = {filmInfo.imdbRating}/>
-            <p className={style.imdbRating}>{filmInfo.imdbRating}/10</p>
+            <p className={style.imdb_rating}>{filmInfo.imdbRating}/10</p>
           </div>      
           <div className={style.film_info_block}>
-            <div className={style.year}>{filmInfo.Year}</div>
-            <div className={style.runtime}>{filmInfo.Runtime}</div>
-            <div className={style.genre}>{filmInfo.Genre}</div>
-            <div className={style.languages}>{filmInfo.Language}</div>
+            <InfoBlock info = {filmInfo.Year}/>
+            <InfoBlock info = {filmInfo.Runtime}/>
+            <InfoBlock info = {filmInfo.Genre}/>
+            <InfoBlock info = {filmInfo.Language}/>
           </div>
           <p className={style.plot}>{filmInfo.Plot}</p>
           <div className={style.other_ratings}>
@@ -63,35 +64,35 @@ const FilmPage = () => {
           </div>
           <div className={style.edit_block}><button className={style.edit}>Edit</button></div>
           <div className={style.production_info_block}>
-              <hr color="#45A29E"/>
+              <hr />
               <div>
-                <span>Production</span>
-                <span>{filmInfo.Production}</span>
+                <p>Production</p>
+                <p>{filmInfo.Production}</p>
               </div>
               <hr color="#45A29E"/>
               <div>
-                <span>Country</span>
-                <span>{filmInfo.Country}</span>
+                <p>Country</p>
+                <p>{filmInfo.Country}</p>
               </div>
               <hr color="#45A29E"/>
               <div>
-                <span>Director</span>
-                <span>{filmInfo.Director}</span>
+                <p>Director</p>
+                <p>{filmInfo.Director}</p>
               </div>
               <hr color="#45A29E"/>
               <div>
-                <span>Writer</span>
-                <span>{filmInfo.Writer}</span>
+                <p>Writer</p>
+                <p>{filmInfo.Writer}</p>
               </div>
               <hr color="#45A29E"/>
               <div>
-                <span>Actors</span>
-                <span>{filmInfo.Actors}</span>
+                <p>Actors</p>
+                <p>{filmInfo.Actors}</p>
               </div>
               <hr color="#45A29E"/>
               <div>
-                <span>Awards</span>
-                <span>{filmInfo.Awards}</span>
+                <p>Awards</p>
+                <p>{filmInfo.Awards}</p>
               </div>
               <hr color="#45A29E"/> 
           </div>
