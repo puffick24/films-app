@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import style from '../../styles/FilmPage.module.css';
 import Rating from './Rating'
+import RenderField from './RenderField';
 
 const FilmPage = () => {
   const {id} = useParams()
@@ -12,35 +13,16 @@ const FilmPage = () => {
   const [filmInfo,setFilmInfo] = useState({})
   const [ratings, setRatings] = useState([])
   const [isEditing, setIsEditing] = useState(false)
-  const [inputValue, setInputValue] = useState('')
-  const [field,setField] = useState('')
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setField(name)
-    setInputValue(value)
+  
+  const handleFieldChange = (fieldName, newValue) => {
+    setFilmInfo((prevState) => ({
+      ...prevState,
+      [fieldName]: newValue,
+    }));
   };
 
   const editHandle = () => {
-    setIsEditing(true)
-  }
-
-  const saveHandle = () => { 
-    setIsEditing(false)
-    setFilmInfo((prevState) => ({
-      ...prevState,
-      [field]: inputValue,
-    }));
-  }
-
-  const renderField = (field,currValue,isEditing) => {
-    switch(true){     
-      case isEditing:
-        return <input name = {field} value = {currValue} onChange={handleInputChange}/>
-      case !isEditing:
-        return <span>{currValue}</span>
-    }
-     
+    setIsEditing(!isEditing)
   }
 
   const getFilmInfo = async () => {
@@ -94,46 +76,46 @@ const FilmPage = () => {
           </div>
           <div className={style.edit_block}>
             {
-              isEditing ? <button className={style.edit} onClick = {saveHandle}>Save</button> : <button className={style.edit} onClick = {editHandle}>Edit</button>
+              isEditing ? <button className={style.edit} onClick = {editHandle}>Save</button> : <button className={style.edit} onClick = {editHandle}>Edit</button>
             }
             </div>
           <div className={style.production_info_block}>
-              <hr color="#45A29E"/>      
-              <div>
-                <span>Production</span>
-                {renderField('Production',filmInfo.Production,isEditing)}
-              </div>
-              <hr color="#45A29E"/>
-              <div>
-                <span>Country</span>
-                {renderField('Country',filmInfo.Country,isEditing)}
-                {/* <span>{filmInfo.Country}</span> */}
-              </div>
-              <hr color="#45A29E"/>
-              <div>
-                <span>Director</span>
-                {renderField('Director',filmInfo.Director,isEditing)}
-                {/* <span>{filmInfo.Director}</span> */}
-              </div>
-              <hr color="#45A29E"/>
-              <div>
-                <span>Writer</span>
-                {renderField('Writer',filmInfo.Writer,isEditing)}
-                {/* <span>{filmInfo.Writer}</span> */}
-              </div>
-              <hr color="#45A29E"/>
-              <div>
-                <span>Actors</span>
-                {renderField('Actors',filmInfo.Actors,isEditing)}
-                {/* <span>{filmInfo.Actors}</span> */}
-              </div>
-              <hr color="#45A29E"/>
-              <div>
-                <span>Awards</span>
-                {renderField('Awards',filmInfo.Awards,isEditing)}
-                {/* <span>{filmInfo.Awards}</span> */}
-              </div>
-              <hr color="#45A29E"/> 
+            <RenderField
+              label="Production"
+              value={filmInfo.Production}
+              isEditing={isEditing}
+              onFieldChange={handleFieldChange}
+            />
+            <RenderField
+              label="Country"
+              value={filmInfo.Country}
+              isEditing={isEditing}
+              onFieldChange={handleFieldChange}
+            />
+            <RenderField
+              label="Director"
+              value={filmInfo.Director}
+              isEditing={isEditing}
+              onFieldChange={handleFieldChange}
+            />
+            <RenderField
+              label="Writer"
+              value={filmInfo.Writer}
+              isEditing={isEditing}
+              onFieldChange={handleFieldChange}
+            />
+            <RenderField
+              label="Actors"
+              value={filmInfo.Actors}
+              isEditing={isEditing}
+              onFieldChange={handleFieldChange}
+            />
+            <RenderField
+              label="Awards"
+              value={filmInfo.Awards}
+              isEditing={isEditing}
+              onFieldChange={handleFieldChange}
+            />
           </div>
         </div>
       </div>
