@@ -49,6 +49,11 @@
     justify-content: space-between;
 }
 
+.rating{
+    display: flex;
+    gap:10px
+}
+
 .edit{
     background-color: var(--theme-color);
     padding: 6px 50px;
@@ -64,8 +69,21 @@
     margin: 15px auto;
 }
 
+.production_info_block{
+    border-bottom: 1px solid #45A29E;   
+}
+
 .production_info_block div{
+    height: 50px;
     padding: 15px 0;
     display: flex;
     justify-content: space-between;
+    border-top: 1px solid #45A29E;
+}
+
+.production_info_block div input{
+    border-radius: 5px;
+    height: 25px;
+    width: 200px;
+    padding: 5px 3px;
 }

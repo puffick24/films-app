@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import style from './FilmPage.module.css';
 import Rating from './Rating'
+import RenderField from './RenderField';
 import InfoBlock from './InfoBlock';
 
 const FilmPage = () => {
@@ -12,6 +13,18 @@ const FilmPage = () => {
   const [loading,setLoading] = useState(false)
   const [filmInfo,setFilmInfo] = useState({})
   const [ratings, setRatings] = useState([])
+  const [isEditing, setIsEditing] = useState(false)
+  
+  const handleFieldChange = (fieldName, newValue) => {
+    setFilmInfo((prevState) => ({
+      ...prevState,
+      [fieldName]: newValue,
+    }));
+  };
+
+  const editHandle = () => {
+    setIsEditing(!isEditing)
+  }
 
   const getFilmInfo = async () => {
     try{
@@ -62,39 +75,48 @@ const FilmPage = () => {
               ))
               } 
           </div>
-          <div className={style.edit_block}><button className={style.edit}>Edit</button></div>
+          <div className={style.edit_block}>
+            {
+              isEditing ? <button className={style.edit} onClick = {editHandle}>Save</button> : <button className={style.edit} onClick = {editHandle}>Edit</button>
+            }
+            </div>
           <div className={style.production_info_block}>
-              <hr />
-              <div>
-                <p>Production</p>
-                <p>{filmInfo.Production}</p>
-              </div>
-              <hr color="#45A29E"/>
-              <div>
-                <p>Country</p>
-                <p>{filmInfo.Country}</p>
-              </div>
-              <hr color="#45A29E"/>
-              <div>
-                <p>Director</p>
-                <p>{filmInfo.Director}</p>
-              </div>
-              <hr color="#45A29E"/>
-              <div>
-                <p>Writer</p>
-                <p>{filmInfo.Writer}</p>
-              </div>
-              <hr color="#45A29E"/>
-              <div>
-                <p>Actors</p>
-                <p>{filmInfo.Actors}</p>
-              </div>
-              <hr color="#45A29E"/>
-              <div>
-                <p>Awards</p>
-                <p>{filmInfo.Awards}</p>
-              </div>
-              <hr color="#45A29E"/> 
+            <RenderField
+              label="Production"
+              value={filmInfo.Production}
+              isEditing={isEditing}
+              onFieldChange={handleFieldChange}
+            />
+            <RenderField
+              label="Country"
+              value={filmInfo.Country}
+              isEditing={isEditing}
+              onFieldChange={handleFieldChange}
+            />
+            <RenderField
+              label="Director"
+              value={filmInfo.Director}
+              isEditing={isEditing}
+              onFieldChange={handleFieldChange}
+            />
+            <RenderField
+              label="Writer"
+              value={filmInfo.Writer}
+              isEditing={isEditing}
+              onFieldChange={handleFieldChange}
+            />
+            <RenderField
+              label="Actors"
+              value={filmInfo.Actors}
+              isEditing={isEditing}
+              onFieldChange={handleFieldChange}
+            />
+            <RenderField
+              label="Awards"
+              value={filmInfo.Awards}
+              isEditing={isEditing}
+              onFieldChange={handleFieldChange}
+            />
           </div>
         </div>
       </div>
