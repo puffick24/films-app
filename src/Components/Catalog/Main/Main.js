@@ -1,26 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import {Pagination} from '@mui/material'
 
+import style from './Main.module.css'
 
-import style from '../../../styles/Main.module.css'
-
-import FilmsList from '../FilmsList/FilmsList';
-import Paginations from '../Pagination/Pagination'
+import Film from '../Film';
+import ModalDeleteConfirm from '../../ModalDeleteConfirm';
 import { keys } from '../../../keys';
 
 const Main = () => {
     const [films,setFilms] = useState([])
-    const [filmsPerPage] = useState(8)
     const [currentFilmsPage, setCurrentFilmsPage] = useState(1)
     const [loading,setLoading] = useState(false)
-    const [delKeys,setDelKeys] = useState([])
     const [keysState,setKeysState] = useState(keys)
-    
+    const filmsPerPage = 8
+
+    const [delKeys,setDelKeys] = useState([])
+    const [filmID,setFilmID] = useState('')
+
+    const [active,setModalActive] = useState(false)
+
+    const pageNum = Math.ceil(keysState.length/filmsPerPage);
+
+    const deleteFilm = (id) =>{
+        setDelKeys([...delKeys, id])
+        setModalActive(false)       
+    }
+
     const getFilms = async () => {
         try{
             setLoading(true)
-            const newKeysState = keysState.filter((i) => i !== delKeys)
+            const lastFilmIndex = Math.min(currentFilmsPage * filmsPerPage, keys.length);
+            const firstFilmIndex = (currentFilmsPage - 1) * filmsPerPage
+
+            const newKeysState = keysState.filter((i) => !delKeys.includes(i))
             setKeysState(newKeysState)
 
             const endpoints = newKeysState.slice(firstFilmIndex,lastFilmIndex)           
@@ -48,21 +61,36 @@ const Main = () => {
         getFilms()
     },[currentFilmsPage,delKeys])
 
-    
-    const lastFilmIndex = Math.min(currentFilmsPage * filmsPerPage, keys.length);
-    const firstFilmIndex = (currentFilmsPage - 1) * filmsPerPage
-
     const paginate = pageNum => setCurrentFilmsPage(pageNum)
+
+    const handlePageChange = (event,page) => {
+        paginate(page)
+    }
+
+    const getFilmIDHandle = (filmID) => {
+        setModalActive(true)
+        setFilmID(filmID)
+    }
+
+    if(loading){
+        return <h2>Loading...</h2>
+    }
 
     return(
         <main className={style.main}>
-            <FilmsList films = {films} loading = {loading} setFilms= {setFilms} keys={keys} setDelKeys= {setDelKeys}/>
-            <Paginations 
-                filmsPerPage = {filmsPerPage} 
-                totalFilms={keysState.length}
-                paginate = {paginate}
-                currentPage = {currentFilmsPage }
-            />
+            <ul className={style.list}>
+            {
+                films.map((film, i) => (
+                    <Film 
+                        film = {film}
+                        key = {i}
+                        getFilmIDHandle = {getFilmIDHandle}
+                    />
+                ))             
+            }
+            </ul>
+            <Pagination onChange = {handlePageChange} className={style.pagination} count = {pageNum} size = 'large' page = {currentFilmsPage}/>
+            <ModalDeleteConfirm active = {active} setModalActive = {setModalActive} deleteFilm = {deleteFilm} filmID = {filmID}/>
         </main>
     )
 }

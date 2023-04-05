@@ -1,5 +1,5 @@
 import { Link , useLocation} from 'react-router-dom';
-import style from '../../../styles/Header.module.css'
+import style from './Header.module.css'
 
 const Header = () => {
 

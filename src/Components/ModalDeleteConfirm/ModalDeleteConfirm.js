@@ -1,6 +1,6 @@
-import style from '../../styles/ModalDeleteConfirm.module.css'
+import style from './ModalDeleteConfirm.module.css'
 
-import circle from '../../images/circle.svg'
+import Сircle from '../../images/Circle'
 
 const ModalDeleteConfirm = ({active,deleteFilm,setModalActive,filmID}) => {
     const setModalInactive = () => {
@@ -9,14 +9,13 @@ const ModalDeleteConfirm = ({active,deleteFilm,setModalActive,filmID}) => {
     const deleteFilmHandle =() => {
         deleteFilm(filmID)
     }
-    const stopPropagationHandle = (e) => {
-        e.stopPropagation()
-    }
+
+    const setModalStyle = `${style.modal} ${active ? style.active : ''}`
 
     return ( 
-        <div className={`${style.modal} ${active ? style.active : ''}`} onClick = {setModalInactive}>
-            <div className={style.modal_content} onClick = {stopPropagationHandle}>
-                <img src = {circle} alt = 'circle'></img>
+        <div className={setModalStyle}>
+            <div className={style.modal_content} >
+                <Сircle/>
                 <h2>Are you sure ?</h2>
                 <p>Do you really want to remove this movie?<br/>This process cannot be undone.</p>
                 <div>

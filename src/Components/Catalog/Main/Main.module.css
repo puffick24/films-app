@@ -1,3 +1,17 @@
+.main{
+    height: 100%;
+    flex: 1 1 auto;
+}
+
+.list{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    gap:60px;
+    margin: 60px 100px 0;
+}
+
 .pagination ul{
     padding: 50px 0 40px;
     display: flex;
@@ -17,5 +31,5 @@
 }    
 
 .pagination ul li:hover{
-    border: #45A29E solid;
+    border: var(--theme-color) solid;
 }

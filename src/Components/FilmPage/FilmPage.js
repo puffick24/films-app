@@ -2,9 +2,10 @@ import {useParams} from 'react-router-dom'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-import style from '../../styles/FilmPage.module.css';
+import style from './FilmPage.module.css';
 import Rating from './Rating'
 import RenderField from './RenderField';
+import InfoBlock from './InfoBlock';
 
 const FilmPage = () => {
   const {id} = useParams()
@@ -51,19 +52,19 @@ const FilmPage = () => {
   return (
       <div className = {style.container}>
         <div className={style.poster}>
-          <img src = {filmInfo.Poster} alt = 'Poster'></img>
+          <img src = {filmInfo.Poster} alt = 'Poster'/>
         </div>
         <div className={style.info}>
           <p className={style.title}>{filmInfo.Title}</p>
           <div className={style.rating}>
             <Rating rating = {filmInfo.imdbRating}/>
-            <p className={style.imdbRating}>{filmInfo.imdbRating}/10</p>
+            <p className={style.imdb_rating}>{filmInfo.imdbRating}/10</p>
           </div>      
           <div className={style.film_info_block}>
-            <div className={style.year}>{filmInfo.Year}</div>
-            <div className={style.runtime}>{filmInfo.Runtime}</div>
-            <div className={style.genre}>{filmInfo.Genre}</div>
-            <div className={style.languages}>{filmInfo.Language}</div>
+            <InfoBlock info = {filmInfo.Year}/>
+            <InfoBlock info = {filmInfo.Runtime}/>
+            <InfoBlock info = {filmInfo.Genre}/>
+            <InfoBlock info = {filmInfo.Language}/>
           </div>
           <p className={style.plot}>{filmInfo.Plot}</p>
           <div className={style.other_ratings}>

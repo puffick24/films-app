@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import style from '../../styles/FilmPage.module.css'
+import style from './FilmPage.module.css'
 
 const RenderField = ({label, value, isEditing, onFieldChange}) => {
     const [inputValue, setInputValue] = useState(value);
