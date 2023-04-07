@@ -6,6 +6,7 @@ import style from './Main.module.css'
 
 import Film from '../Film';
 import ModalDeleteConfirm from '../../ModalDeleteConfirm';
+import Spinner from '../../../images/Spinner'
 import { keys } from '../../../keys';
 
 const Main = () => {
@@ -73,7 +74,7 @@ const Main = () => {
     }
 
     if(loading){
-        return <h2>Loading...</h2>
+        return <Spinner/>
     }
 
     return(
@@ -90,7 +91,7 @@ const Main = () => {
             }
             </ul>
             <Pagination onChange = {handlePageChange} className={style.pagination} count = {pageNum} size = 'large' page = {currentFilmsPage}/>
-            <ModalDeleteConfirm active = {active} setModalActive = {setModalActive} deleteFilm = {deleteFilm} filmID = {filmID}/>
+            <ModalDeleteConfirm active = {active} setModalActive = {setModalActive} deleteFilm = {deleteFilm} filmID = {filmID}/> 
         </main>
     )
 }

@@ -1,0 +1,20 @@
+.drop_down_menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    background-color: #BCE4E3;
+    padding: 20px;
+}
+
+.drop_down_links{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.drop_down_links,.drop_down_menu a{ 
+    color:#086C68;
+    text-decoration: underline;
+}
