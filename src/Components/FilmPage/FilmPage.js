@@ -1,6 +1,8 @@
 import {useParams} from 'react-router-dom'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+// import {Formik} from 'formik'
+// import * as yup from 'yup'
 
 import style from './FilmPage.module.css';
 import Rating from './Rating'
@@ -45,82 +47,117 @@ const FilmPage = () => {
     getFilmInfo()
   },[])
 
+  // const validationSchema=yup.object({
+  //   Production: yup.string().required('Required'),
+  //   Country: yup.string().required('Required'),
+  //   Director: yup.string().required('Required'),
+  //   Writer: yup.string().required('Required'),
+  //   Actors: yup.string().required('Required'),
+  //   Awards: yup.string().required('Required')
+  // })  
+
   if(loading){
     return <h2>Loading...</h2>
   }
 
   return (
-      <div className = {style.container}>
-        <div className={style.poster}>
-          <img src = {filmInfo.Poster} alt = 'Poster'/>
+    <div className = {style.container}>
+      <div className={style.poster}>
+        <img src = {filmInfo.Poster} alt = 'Poster'/>
+      </div>
+      <div className={style.info}>
+        <div className={style.main_film_info}>
+        <p className={style.title}>{filmInfo.Title}</p>
+        <div className={style.rating}>
+          <Rating rating = {filmInfo.imdbRating}/>
+          <p className={style.imdb_rating}>{filmInfo.imdbRating}/10</p>
+        </div>      
+        <div className={style.film_info_block}>
+          <InfoBlock info = {filmInfo.Year}/>
+          <InfoBlock info = {filmInfo.Runtime}/>
+          <InfoBlock info = {filmInfo.Genre}/>
+          <InfoBlock info = {filmInfo.Language}/>
         </div>
-        <div className={style.info}>
-          <p className={style.title}>{filmInfo.Title}</p>
-          <div className={style.rating}>
-            <Rating rating = {filmInfo.imdbRating}/>
-            <p className={style.imdb_rating}>{filmInfo.imdbRating}/10</p>
-          </div>      
-          <div className={style.film_info_block}>
-            <InfoBlock info = {filmInfo.Year}/>
-            <InfoBlock info = {filmInfo.Runtime}/>
-            <InfoBlock info = {filmInfo.Genre}/>
-            <InfoBlock info = {filmInfo.Language}/>
-          </div>
-          <p className={style.plot}>{filmInfo.Plot}</p>
-          <div className={style.other_ratings}>
-          <p className={style.ratings}>Other ratings:</p>
-              {
-              ratings.map((item,i) => (
-                <p key = {i}>{item.Source} - {item.Value}</p>
-              ))
-              } 
-          </div>
-          <div className={style.edit_block}>
+        <p className={style.plot}>{filmInfo.Plot}</p>
+        <div className={style.other_ratings}>
+          <p>Other ratings:</p>
+          <div className={style.ratings}>
             {
-              isEditing ? <button className={style.edit} onClick = {editHandle}>Save</button> : <button className={style.edit} onClick = {editHandle}>Edit</button>
-            }
-            </div>
-          <div className={style.production_info_block}>
-            <RenderField
-              label="Production"
-              value={filmInfo.Production}
-              isEditing={isEditing}
-              onFieldChange={handleFieldChange}
-            />
-            <RenderField
-              label="Country"
-              value={filmInfo.Country}
-              isEditing={isEditing}
-              onFieldChange={handleFieldChange}
-            />
-            <RenderField
-              label="Director"
-              value={filmInfo.Director}
-              isEditing={isEditing}
-              onFieldChange={handleFieldChange}
-            />
-            <RenderField
-              label="Writer"
-              value={filmInfo.Writer}
-              isEditing={isEditing}
-              onFieldChange={handleFieldChange}
-            />
-            <RenderField
-              label="Actors"
-              value={filmInfo.Actors}
-              isEditing={isEditing}
-              onFieldChange={handleFieldChange}
-            />
-            <RenderField
-              label="Awards"
-              value={filmInfo.Awards}
-              isEditing={isEditing}
-              onFieldChange={handleFieldChange}
-            />
+            ratings.map((item,i) => (
+              <p key = {i}>{item.Source} - {item.Value}</p>
+            ))
+            } 
           </div>
+        </div>
+        <div className={style.edit_block}>
+          {
+            isEditing ? <button className={style.edit} onClick = {editHandle}>Save</button> : <button className={style.edit} onClick = {editHandle}>Edit</button>
+          }
+          </div>     
+        </div>
+        <div className={style.production_info_block}>
+          {/* валидация ванила */}
+          {/* <Formik
+            initialValues={filmInfo}
+            validationSchema = {validationSchema}
+            validateOnBlur
+            onSubmit={values => {console.log(values)}} 
+          >
+          {({values, errors, touched, handleChange, handleBlur,isValid, handleSubmit, dirty}) => (
+            <div>
+              <p>
+                <input
+                  name = {`Production`}
+                  onChange={handleChange}
+                  onBlur = {handleBlur}
+                  value={values.Production}
+                >
+                </input>
+              </p>
+              {touched.Production && errors.Production && <p>{errors.Production}</p>}
+            </div>
+          )}  
+          </Formik> */}
+          <RenderField
+            label="Production"
+            value={filmInfo.Production}
+            isEditing={isEditing}
+            onFieldChange={handleFieldChange}
+          />
+          <RenderField
+            label="Country"
+            value={filmInfo.Country}
+            isEditing={isEditing}
+            onFieldChange={handleFieldChange}
+          />
+          <RenderField
+            label="Director"
+            value={filmInfo.Director}
+            isEditing={isEditing}
+            onFieldChange={handleFieldChange}
+          />
+          <RenderField
+            label="Writer"
+            value={filmInfo.Writer}
+            isEditing={isEditing}
+            onFieldChange={handleFieldChange}
+          />
+          <RenderField
+            label="Actors"
+            value={filmInfo.Actors}
+            isEditing={isEditing}
+            onFieldChange={handleFieldChange}
+          />
+          <RenderField
+            label="Awards"
+            value={filmInfo.Awards}
+            isEditing={isEditing}
+            onFieldChange={handleFieldChange}
+          />
         </div>
       </div>
-    );
+    </div>
+  );
 }
 
 export default FilmPage;

@@ -3,12 +3,12 @@
     height: 430px;  
     list-style-type: none;
     background-color: #000000;
+    position: relative;
 }
 
 .image{
-    margin: auto;
-    width: 330px;
-    height: 430px;   
+    width: 100%;
+    height: 100%;   
 }
 
 .info, .remove{
@@ -17,18 +17,19 @@
     border-radius: 15px;
     background-color:  var(--theme-color);
     color: white;
-    position: relative;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .info{
-   bottom:200px;
-   left: 110px;
-   padding: 5px 40px;
+    top: 80%;   
+    padding: 5px 39px;
 }
 
-.remove{
-    bottom:160px;
-    padding: 7px 23px;
+.remove{  
+    top: 90%;
+    padding: 6px 23px;
     font-size: 16px;
     font-weight: 600;
 }
@@ -53,9 +54,173 @@
 .year,.title{
     padding: 5px 15px;
     color: aliceblue;
-    position: relative;
+    position: absolute;
     opacity: 0;
     font-size: 22px;
     left: 10px;
-    bottom:410px;
+}
+
+.year{
+    top: 70px;
+ }
+ 
+ .title{  
+    top:15px;
+ }
+
+@media screen and (max-width: 1740px){
+    .poster{
+        width: 270px;
+        height: 350px;
+    }
+
+    .info{
+        padding: 2px 37px;
+    }
+    
+    .remove{  
+        padding: 4px 21px;
+    }
+
+    .year,.title{
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 1450px){
+    .poster{
+        width: 230px;
+        height: 300px;
+    }
+
+    .info{
+        padding: 2px 33px;
+    }
+    
+    .remove{  
+        font-size: 14px;
+    }
+
+    .year,.title{
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 1170px){
+    .poster{
+        width: 200px;
+        height: 260px;
+    }
+
+    .info{
+        padding: 1px 30px;
+        font-size: 13px;
+    }
+    
+    .remove{  
+        font-size: 12px;
+        padding: 3px 20px;
+    }
+    .year{
+        top: 60px;
+     }
+     
+     .title{  
+        top:10px;
+    }
+
+    .year,.title{
+        left: 0;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 980px){
+    .poster{
+        width: 150px;
+        height: 200px;
+    }
+
+    .info{
+        padding: 1px 25px;
+        font-size: 10px;
+    }
+    
+    .remove{  
+        font-size: 9px;
+        padding: 3px 16px;
+    }
+
+    .year{
+        top: 50px;
+     }
+     
+     .title{  
+        top:5px;
+    }
+
+    .year,.title{
+        left: 0;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .poster{
+        width: 330px;
+        height: 430px;
+    }    
+    .info{
+        font-size: 16px;
+        padding: 5px 39px;
+    }
+    
+    .remove{  
+        padding: 6px 23px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .year,.title{
+        padding: 5px 15px;
+        font-size: 22px;
+        left: 10px;
+    }
+
+    .year{
+        top: 70px;
+     }
+     
+     .title{  
+        top:15px;
+     }
+}
+
+@media screen and (max-width: 425px){
+    .poster{
+        width: 200px;
+        height: 260px;
+    }
+
+    .info{
+        padding: 1px 30px;
+        font-size: 14px;
+    }
+    
+    .remove{  
+        font-size: 12px;
+        padding: 3px 20px;
+    }
+    .year{
+        top: 60px;
+     }
+     
+     .title{  
+        top:10px;
+    }
+
+    .year,.title{
+        left: 0;
+        font-size: 14px;
+    }
 }

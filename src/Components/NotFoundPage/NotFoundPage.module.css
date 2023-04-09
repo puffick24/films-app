@@ -1,3 +1,10 @@
+.not_found_wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
 .container{
     display: flex;
     flex-direction: column;
@@ -5,7 +12,6 @@
     align-items: center;
     font-size: 36px;
     color:#fff;
-    padding: 190px 0 10px;
 }
 
 h1{
@@ -15,4 +21,28 @@ h1{
 
 .container p {
     padding: 10px;
+}
+
+@media screen and (max-width: 1024px){
+    .container{
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .container{
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 510px){
+    .container{
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 375){
+    .container{
+        font-size: 12px;
+    }
 }

@@ -8,9 +8,8 @@
 }
 
 .info{
-    width: 900px;
-    height: 540px;
-    padding-top: 30px;
+    width: 1050px;
+    padding: 30px 60px 0 0;
 }
 
 .title{
@@ -32,7 +31,9 @@
     justify-content: space-between;
     text-align: center;
     padding-bottom: 30px;
+    gap:10px;
 }
+
 .film_info_block div{
     background-color: var(--theme-color);
     padding: 6px 30px;
@@ -47,6 +48,11 @@
 .other_ratings{
     display: flex;
     justify-content: space-between;
+}
+
+.ratings{
+    display: flex;
+    gap: 60px;
 }
 
 .rating{
@@ -86,4 +92,176 @@
     height: 25px;
     width: 200px;
     padding: 5px 3px;
+}
+
+@media screen and (max-width:1440px){
+    .poster{
+        padding: 30px 40px 0 50px;
+    }
+}
+
+@media screen and (max-width:1330px){
+    .poster img{
+        width: 260px;
+    }
+
+    .film_info_block div{
+        padding: 5px 25px;
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width:1230px){
+    .info{
+        font-size: 13px;
+    }
+    .title{
+        font-size: 30px;
+    }
+
+    .film_info_block div{
+        padding: 4px 20px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width:1130px){
+    .film_info_block div{
+        padding: 4px 18px;
+        font-size: 12px;
+    }
+    .info{
+        padding-right: 50px;
+        font-size: 13px;
+    }
+
+    .title{
+        font-size: 28px;
+    }
+
+    .poster img{
+        width: 230px;
+    }
+    .edit{
+        font-size:13px;
+        padding: 5px 40px;
+    }
+
+    .edit_block{
+        padding-bottom: 26px;
+    }
+
+    .production_info_block div{
+        height: 44px;
+        padding: 12px 0;
+    }
+
+    .ratings{
+        display: flex;
+        gap: 25px;
+    }
+}
+
+@media screen and (max-width:990px){
+    .info{
+        font-size: 12px;
+    }
+    .ratings{
+        gap: 10px;
+    }
+
+    .film_info_block div{
+        padding: 3px 15px;
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width:925px){
+    .ratings{
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width:900px){
+    .film_info_block div{
+        padding: 3px 13px;
+        font-size: 9px;
+    }
+
+    .edit{
+        font-size:11px;
+        padding: 4px 33px;
+    }
+
+    .edit_block{
+        padding-bottom: 23px;
+    }
+}
+
+@media screen and (max-width:840px){
+    .film_info_block div{
+        padding: 3px 9px;
+        font-size: 8px;
+    }
+}
+
+@media screen and (max-width:768px){
+    .container{
+        flex-direction:column;
+        align-items: center;
+    }
+
+    .poster,.poster img{
+        padding: 20px 0 0;
+        width: 400px;
+    }
+
+    .main_film_info{
+        margin: 0 auto;
+        width: 400px;
+    }
+
+    .info{
+        align-items: center;
+        font-size: 14px;
+        max-width: 600px;
+        padding: 30px 0 50px;
+    }
+
+    .film_info_block{
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .film_info_block div{
+        padding: 6px 20px;
+        font-size: 14px;
+    }
+
+    .production_info_block{
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width:425px){
+    .poster,.poster img{
+        padding: 20px 0 0;
+        width: 300px;
+    }
+
+    .main_film_info{
+        margin: 0 auto;
+        width: 300px;
+    }
+
+    .info{
+        align-items: center;
+        max-width: 350px;
+        padding: 30px 0 50px;
+        font-size: 12px;
+    }
+
+    .production_info_block{
+        font-size: 12px;
+    }
 }
