@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import style from './Film.module.css'
 import AltPoster from '../../../images/AltPoster.jpg'
 
-const Film = ({film,getFilmIDHandle}) => {
+const Film = ({film, getFilmIDHandle}) => {
 
     const getID = () => {
         getFilmIDHandle(film.id)

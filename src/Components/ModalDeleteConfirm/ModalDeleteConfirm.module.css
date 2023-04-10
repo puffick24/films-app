@@ -64,3 +64,49 @@
 .delete{
     background-color: var(--theme-color);
 }
+
+@media screen and (max-width:768px){
+    .modal_content{
+        width: 450px;
+        height: 280px;
+    }
+    
+    .modal_content h2{
+        font-size: 26px;
+    }
+    
+    .modal_content p{
+        font-size: 14px;
+    }
+
+    .modal_content div button{
+        width: 130px;
+        height: 40px;
+    }
+}
+
+@media screen and (max-width:425px){
+    .modal_content{
+        width: 320px;
+        height: 200px;
+    }
+    
+    .modal_content h2{
+        font-size: 15px;
+    }
+    
+    .modal_content p{
+        font-size: 12px;
+        margin-bottom: 25px;
+    }
+
+    .modal_content div button{
+        width: 100px;
+        height: 30px;
+    }
+
+    .modal_content svg{
+        width: 30px;
+        height: 30px;
+    }
+}

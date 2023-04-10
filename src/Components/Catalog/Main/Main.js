@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {Pagination} from '@mui/material'
+import { Pagination } from '@mui/material'
+import { useSelector } from 'react-redux'
 
 import style from './Main.module.css'
 
@@ -16,17 +17,13 @@ const Main = () => {
     const [keysState,setKeysState] = useState(keys)
     const filmsPerPage = 8
 
-    const [delKeys,setDelKeys] = useState([])
     const [filmID,setFilmID] = useState('')
 
     const [active,setModalActive] = useState(false)
 
     const pageNum = Math.ceil(keysState.length/filmsPerPage);
 
-    const deleteFilm = (id) =>{
-        setDelKeys([...delKeys, id])
-        setModalActive(false)       
-    }
+    const keysStore = useSelector(state => state.keysRemove.keys)
 
     const getFilms = async () => {
         try{
@@ -34,7 +31,7 @@ const Main = () => {
             const lastFilmIndex = Math.min(currentFilmsPage * filmsPerPage, keys.length);
             const firstFilmIndex = (currentFilmsPage - 1) * filmsPerPage
 
-            const newKeysState = keysState.filter((i) => !delKeys.includes(i))
+            const newKeysState = keysState.filter((i) => !keysStore.includes(i))
             setKeysState(newKeysState)
 
             const endpoints = newKeysState.slice(firstFilmIndex,lastFilmIndex)           
@@ -60,7 +57,7 @@ const Main = () => {
 
     useEffect(() => { 
         getFilms()
-    },[currentFilmsPage,delKeys])
+    },[currentFilmsPage,keysStore])
 
     const paginate = pageNum => setCurrentFilmsPage(pageNum)
 
@@ -91,7 +88,7 @@ const Main = () => {
             }
             </ul>
             <Pagination onChange = {handlePageChange} className={style.pagination} count = {pageNum} size = 'large' page = {currentFilmsPage}/>
-            <ModalDeleteConfirm active = {active} setModalActive = {setModalActive} deleteFilm = {deleteFilm} filmID = {filmID}/> 
+            <ModalDeleteConfirm active = {active} setModalActive = {setModalActive} filmID = {filmID}/> 
         </main>
     )
 }

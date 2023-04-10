@@ -34,16 +34,9 @@ const Header = () => {
                             <Link to = '/'>Main</Link>
                     }
                 </div>
-                {
-                    isActive ? 
-                        <button className={style.adaptive_menu} onClick = {isActiveHandle}>
-                            <CloseAdaptiveMenu/>
-                        </button>
-                    :
-                        <button className={style.adaptive_menu} onClick = {isActiveHandle}>
-                            <AdaptiveMenu/>
-                        </button>
-                }
+                    <button className={style.adaptive_menu} onClick = {isActiveHandle}>
+                        {isActive ?  <CloseAdaptiveMenu/> : <AdaptiveMenu/>}
+                    </button>
             </nav>   
             {
                 isActiveMenu ? <DropDownMenu isActiveHandle = {isActiveHandle} mainUrl= {mainUrl}/> : ''
