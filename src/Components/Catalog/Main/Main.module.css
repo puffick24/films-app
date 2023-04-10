@@ -110,3 +110,14 @@
         height: 33px;
     }
 }
+
+@media screen and (max-width: 375px){
+    .pagination ul{
+        gap: 3px;
+    }
+
+    .pagination ul li{
+        width: 30px;
+        height: 30px;
+    }
+}

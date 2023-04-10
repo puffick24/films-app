@@ -1,13 +1,26 @@
 import style from './ModalDeleteConfirm.module.css'
 
 import Сircle from '../../images/Circle'
+import { useDispatch } from 'react-redux'
 
-const ModalDeleteConfirm = ({active,deleteFilm,setModalActive,filmID}) => {
-    const setModalInactive = () => {
+const ModalDeleteConfirm = ({active,setModalActive,filmID}) => {
+    const setModalInactive = (id) => {
+        removeDelKeys(id)
         setModalActive(false)
     }
     const deleteFilmHandle =() => {
-        deleteFilm(filmID)
+        addDelKeys(filmID)
+        setModalActive(false)
+    }
+
+    const dispatch = useDispatch()
+
+    const addDelKeys = (id) => {
+        dispatch({type : "ADD_KEY", payload: id})
+    }
+
+    const removeDelKeys = (id) => {
+        dispatch({type : "REMOVE_KEY", payload: id})
     }
 
     const setModalStyle = `${style.modal} ${active ? style.active : ''}`

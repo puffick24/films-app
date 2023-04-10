@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import style from './FilmPage.module.css'
 
-const RenderField = ({label, value, isEditing, onFieldChange, validationSchema, filmInfo}) => {
+const RenderField = ({ label, value, isEditing, onFieldChange,field,touched,errors}) => {
     const [inputValue, setInputValue] = useState(value);
 
     const handleInputChange = (event) => {
@@ -15,9 +15,12 @@ const RenderField = ({label, value, isEditing, onFieldChange, validationSchema, 
             <p>{label}</p>
             {
                 isEditing ? (
-                <input value={inputValue} onChange={handleInputChange} />
+                    <div>
+                        <input value={inputValue} onChange={handleInputChange} {...field}/>
+                    {/* {errors[field.Production] && touched[field.Production] && (<div>{errors[field.Production]}</div>)} */}
+                    </div>
                 ) : (
-                <p>{value}</p>
+                    <p>{value}</p>
                 )
             }
             </div>
