@@ -1,26 +1,31 @@
 import style from './ModalDeleteConfirm.module.css'
+import PropTypes from 'prop-types'
 
 import Сircle from '../../images/Circle'
 import { useDispatch } from 'react-redux'
+import { addKeyAction, removeKeyAction } from '../store/KeysRemovingReducer'
+import { addSnackStatusAction } from '../store/SnackbarReducer'
 
 const ModalDeleteConfirm = ({active,setModalActive,filmID}) => {
+    const dispatch = useDispatch()
+
     const setModalInactive = (id) => {
         removeDelKeys(id)
         setModalActive(false)
     }
+    
     const deleteFilmHandle =() => {
         addDelKeys(filmID)
+        dispatch(addSnackStatusAction({open: true, severity: 'success', message: 'Movie deleted successfully'}))
         setModalActive(false)
     }
 
-    const dispatch = useDispatch()
-
     const addDelKeys = (id) => {
-        dispatch({type : "ADD_KEY", payload: id})
+        dispatch(addKeyAction(id))
     }
 
     const removeDelKeys = (id) => {
-        dispatch({type : "REMOVE_KEY", payload: id})
+        dispatch(removeKeyAction(id))
     }
 
     const setModalStyle = `${style.modal} ${active ? style.active : ''}`
@@ -38,6 +43,12 @@ const ModalDeleteConfirm = ({active,setModalActive,filmID}) => {
             </div>
         </div>
      );
+}
+
+ModalDeleteConfirm.propTypes = {
+    active: PropTypes.bool.isRequired,
+    filmID: PropTypes.string.isRequired,
+    setModalActive: PropTypes.func.isRequired
 }
 
 export default ModalDeleteConfirm;

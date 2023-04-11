@@ -9,6 +9,7 @@ import Film from '../Film';
 import ModalDeleteConfirm from '../../ModalDeleteConfirm';
 import Spinner from '../../../images/Spinner'
 import { keys } from '../../../keys';
+import SnackbarComponent from '../../Snackbar/SnackbarComponent';
 
 const Main = () => {
     const [films,setFilms] = useState([])
@@ -70,6 +71,8 @@ const Main = () => {
         setFilmID(filmID)
     }
 
+    const open = useSelector(state => state.snackbars.open)
+    
     if(loading){
         return <Spinner/>
     }
@@ -84,11 +87,14 @@ const Main = () => {
                         key = {i}
                         getFilmIDHandle = {getFilmIDHandle}
                     />
-                ))             
+                ))          
             }
             </ul>
             <Pagination onChange = {handlePageChange} className={style.pagination} count = {pageNum} size = 'large' page = {currentFilmsPage}/>
-            <ModalDeleteConfirm active = {active} setModalActive = {setModalActive} filmID = {filmID}/> 
+            <ModalDeleteConfirm active = {active} setModalActive = {setModalActive} filmID = {filmID}/>
+            {
+                open && <SnackbarComponent open = {open}/>
+            }
         </main>
     )
 }

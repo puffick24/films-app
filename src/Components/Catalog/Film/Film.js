@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import style from './Film.module.css'
 import AltPoster from '../../../images/AltPoster.jpg'
@@ -24,5 +24,15 @@ const Film = ({film, getFilmIDHandle}) => {
         </li>
      );     
 }
+
+Film.propTypes = {
+    film: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      year: PropTypes.string.isRequired,
+      poster: PropTypes.string,
+    }).isRequired,
+    getFilmIDHandle: PropTypes.func.isRequired,
+  };
 
 export default Film;

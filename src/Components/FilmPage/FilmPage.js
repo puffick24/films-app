@@ -9,6 +9,9 @@ import Rating from './Rating'
 import RenderField from './RenderField';
 import InfoBlock from './InfoBlock';
 import Spinner from '../../images/Spinner';
+import { useDispatch, useSelector } from 'react-redux';
+import SnackbarComponent from '../Snackbar/SnackbarComponent';
+import { addSnackStatusAction } from '../store/SnackbarReducer';
 
 const FilmPage = () => {
   const {id} = useParams()
@@ -18,6 +21,9 @@ const FilmPage = () => {
   const [ratings, setRatings] = useState([])
   const [isEditing, setIsEditing] = useState(false)
   
+  const open = useSelector(state => state.snackbars.open)
+  const dispatch = useDispatch()
+
   const handleFieldChange = (fieldName, newValue) => {
     setFilmInfo((prevState) => ({
       ...prevState,
@@ -26,6 +32,11 @@ const FilmPage = () => {
   };
 
   const editHandle = () => {
+    setIsEditing(!isEditing)
+  }
+
+  const saveHandle = () => {
+    dispatch(addSnackStatusAction({open: true, severity: 'success', message: 'Movie edited successfully'}))
     setIsEditing(!isEditing)
   }
 
@@ -92,7 +103,7 @@ const FilmPage = () => {
         </div>
         <div className={style.edit_block}>
           {
-            isEditing ? <button className={style.edit} onClick = {editHandle}>Save</button> : <button className={style.edit} onClick = {editHandle}>Edit</button>
+            isEditing ? <button className={style.edit} onClick = {saveHandle}>Save</button> : <button className={style.edit} onClick = {editHandle}>Edit</button>
           }
           </div>     
         </div>
@@ -193,6 +204,9 @@ const FilmPage = () => {
             onFieldChange={handleFieldChange}
           /> */}
         </div>
+        {
+          open && <SnackbarComponent open = {open}/>
+        }
       </div>
     </div>
   );
