@@ -9,9 +9,9 @@ import Rating from './Rating'
 import RenderField from './RenderField';
 import InfoBlock from './InfoBlock';
 import Spinner from '../../images/Spinner';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import SnackbarComponent from '../Snackbar/SnackbarComponent';
-import { addSnackStatusAction } from '../store/SnackbarReducer';
+import { addSnackStatusAction, addSnackTypeAction } from '../store/SnackbarReducer';
 
 const FilmPage = () => {
   const {id} = useParams()
@@ -20,8 +20,7 @@ const FilmPage = () => {
   const [filmInfo,setFilmInfo] = useState({})
   const [ratings, setRatings] = useState([])
   const [isEditing, setIsEditing] = useState(false)
-  
-  const open = useSelector(state => state.snackbars.open)
+
   const dispatch = useDispatch()
 
   const handleFieldChange = (fieldName, newValue) => {
@@ -36,7 +35,8 @@ const FilmPage = () => {
   }
 
   const saveHandle = () => {
-    dispatch(addSnackStatusAction({open: true, severity: 'success', message: 'Movie edited successfully'}))
+    dispatch(addSnackStatusAction({open: true}))
+    dispatch(addSnackTypeAction({severity: 'success', message: 'Movie edited successfully'}))
     setIsEditing(!isEditing)
   }
 
@@ -164,8 +164,6 @@ const FilmPage = () => {
             </Form>
           )}
           </Formik>
-
-          
           {/* default */}
           {/* <RenderField
             label="Production"
@@ -204,9 +202,7 @@ const FilmPage = () => {
             onFieldChange={handleFieldChange}
           /> */}
         </div>
-        {
-          open && <SnackbarComponent open = {open}/>
-        }
+        <SnackbarComponent/>
       </div>
     </div>
   );

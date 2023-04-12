@@ -16,7 +16,7 @@ const ModalDeleteConfirm = ({active,setModalActive,filmID}) => {
     
     const deleteFilmHandle =() => {
         addDelKeys(filmID)
-        dispatch(addSnackStatusAction({open: true, severity: 'success', message: 'Movie deleted successfully'}))
+        dispatch(addSnackStatusAction({open: true}))
         setModalActive(false)
     }
 
