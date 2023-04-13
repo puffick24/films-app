@@ -1,8 +1,6 @@
 import { useParams} from 'react-router-dom'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import {Formik, Form, Field} from 'formik'
-import * as yup from 'yup'
 
 import style from './FilmPage.module.css';
 import Rating from './Rating'
@@ -20,14 +18,18 @@ const FilmPage = () => {
   const [filmInfo,setFilmInfo] = useState({})
   const [ratings, setRatings] = useState([])
   const [isEditing, setIsEditing] = useState(false)
+  const [isValid, setIsValid] = useState(false);
 
   const dispatch = useDispatch()
+
+  const setSaveStyle = `${style.edit} ${isValid ? style.save_disabled : ''}`
 
   const handleFieldChange = (fieldName, newValue) => {
     setFilmInfo((prevState) => ({
       ...prevState,
       [fieldName]: newValue,
     }));
+    setIsValid(!isValid)
   };
 
   const editHandle = () => {
@@ -58,15 +60,6 @@ const FilmPage = () => {
   useEffect(() => {
     getFilmInfo()
   },[])
-
-  const validationSchema = yup.object().shape({
-    Production: yup.string().required('Required'),
-    Country: yup.string().required('Required'),
-    Director: yup.string().required('Required'),
-    Writer: yup.string().required('Required'),
-    Actors: yup.string().required('Required'),
-    Awards: yup.string().required('Required')
-  })
 
   if(loading){
     return <Spinner/>
@@ -103,69 +96,12 @@ const FilmPage = () => {
         </div>
         <div className={style.edit_block}>
           {
-            isEditing ? <button className={style.edit} onClick = {saveHandle}>Save</button> : <button className={style.edit} onClick = {editHandle}>Edit</button>
+            isEditing ? <button className={setSaveStyle} disabled = {isValid} onClick = {saveHandle}>Save</button> : <button className={style.edit} onClick = {editHandle}>Edit</button>
           }
           </div>     
         </div>
         <div className={style.production_info_block}>
-          <Formik
-            initialValues={filmInfo}
-            validationSchema = {validationSchema}
-            validateOnBlur
-            onSubmit={values => {console.log(values)}}
-          >
-            {({values, errors, touched, handleChange, handleBlur,isValid, handleSubmit, dirty}) => (
-            <Form>
-              <Field
-                name = "Production" as = {RenderField}
-                label="Production"
-                value={filmInfo.Production}
-                isEditing={isEditing}
-                onFieldChange={handleFieldChange}
-              />
-              {touched.Production && errors.Production   && (<div>{errors.Production}</div>)}
-              <Field name = "Country" as = {RenderField}
-                label="Country"
-                value={filmInfo.Country}
-                isEditing={isEditing}
-                onFieldChange={handleFieldChange}
-              />
-              {errors.Country && touched.Country && (<div>{errors.Country}</div>)}
-              <Field
-                name = "Director" as = {RenderField}
-                label="Director"
-                value={filmInfo.Director}
-                isEditing={isEditing}
-                onFieldChange={handleFieldChange}
-              />
-              {errors.Director && touched.Director && (<div>{errors.Director}</div>)}
-              <Field name = "Writer" as = {RenderField}
-                label="Writer"
-                value={filmInfo.Writer}
-                isEditing={isEditing}
-                onFieldChange={handleFieldChange}
-              />
-              {errors.Writer && touched.Writer && (<div>{errors.Writer}</div>)}
-              <Field
-                name = "Actors" as = {RenderField}
-                label="Actors"
-                value={filmInfo.Actors}
-                isEditing={isEditing}
-                onFieldChange={handleFieldChange}
-              />
-              {errors.Actors && touched.Actors && (<div>{errors.Writer}</div>)}
-              <Field name = "Awards" as = {RenderField}
-                label="Awards"
-                value={filmInfo.Awards}
-                isEditing={isEditing}
-                onFieldChange={handleFieldChange}
-              />
-              {errors.Awards && touched.Awards && (<div>{errors.Awards}</div>)}
-            </Form>
-          )}
-          </Formik>
-          {/* default */}
-          {/* <RenderField
+          <RenderField
             label="Production"
             value={filmInfo.Production}
             isEditing={isEditing}
@@ -200,7 +136,7 @@ const FilmPage = () => {
             value={filmInfo.Awards}
             isEditing={isEditing}
             onFieldChange={handleFieldChange}
-          /> */}
+          />
         </div>
         <SnackbarComponent/>
       </div>

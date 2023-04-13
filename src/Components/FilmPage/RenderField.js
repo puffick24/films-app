@@ -2,8 +2,15 @@ import { useState } from 'react';
 import style from './FilmPage.module.css'
 import PropTypes from 'prop-types'
 
+import { Formik } from 'formik';
+import * as yup from 'yup';
+
 const RenderField = ({ label, value, isEditing, onFieldChange}) => {
     const [inputValue, setInputValue] = useState(value);
+
+    const validationSchema = yup.object().shape({
+        value: yup.string().required('This field is required.'),
+      });
 
     const handleInputChange = (event) => {
         const newValue = event.target.value;
@@ -16,8 +23,26 @@ const RenderField = ({ label, value, isEditing, onFieldChange}) => {
             <p>{label}</p>
             {
                 isEditing ? (
-                        <input value={inputValue} onChange={handleInputChange}/>
-                    // {/* {errors[field.Production] && touched[field.Production] && (<div>{errors[field.Production]}</div>)} */}
+                    <Formik
+                        initialValues={{ value: value }}
+                        validationSchema={validationSchema}
+                        onSubmit={() => {}}
+                    >
+                    {({ errors, touched, handleChange, handleBlur }) => (
+                        <div className={style.input_block}>
+                            <input
+                                name="value"
+                                value={inputValue}
+                                onChange={(event) => {
+                                    handleChange(event)
+                                    handleInputChange(event)  
+                                }}
+                                onBlur={handleBlur}
+                            />
+                            {errors.value && touched.value && (<div className={style.valid_message}>{errors.value}</div>)}
+                        </div>
+                    )}
+                    </Formik>
                 ) : (
                     <p>{value}</p>
                 )
