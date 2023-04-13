@@ -9,6 +9,9 @@ import Rating from './Rating'
 import RenderField from './RenderField';
 import InfoBlock from './InfoBlock';
 import Spinner from '../../images/Spinner';
+import { useDispatch } from 'react-redux';
+import SnackbarComponent from '../Snackbar/SnackbarComponent';
+import { addSnackStatusAction, addSnackTypeAction } from '../store/SnackbarReducer';
 
 const FilmPage = () => {
   const {id} = useParams()
@@ -17,7 +20,9 @@ const FilmPage = () => {
   const [filmInfo,setFilmInfo] = useState({})
   const [ratings, setRatings] = useState([])
   const [isEditing, setIsEditing] = useState(false)
-  
+
+  const dispatch = useDispatch()
+
   const handleFieldChange = (fieldName, newValue) => {
     setFilmInfo((prevState) => ({
       ...prevState,
@@ -26,6 +31,12 @@ const FilmPage = () => {
   };
 
   const editHandle = () => {
+    setIsEditing(!isEditing)
+  }
+
+  const saveHandle = () => {
+    dispatch(addSnackStatusAction({open: true}))
+    dispatch(addSnackTypeAction({severity: 'success', message: 'Movie edited successfully'}))
     setIsEditing(!isEditing)
   }
 
@@ -92,7 +103,7 @@ const FilmPage = () => {
         </div>
         <div className={style.edit_block}>
           {
-            isEditing ? <button className={style.edit} onClick = {editHandle}>Save</button> : <button className={style.edit} onClick = {editHandle}>Edit</button>
+            isEditing ? <button className={style.edit} onClick = {saveHandle}>Save</button> : <button className={style.edit} onClick = {editHandle}>Edit</button>
           }
           </div>     
         </div>
@@ -153,8 +164,6 @@ const FilmPage = () => {
             </Form>
           )}
           </Formik>
-
-          
           {/* default */}
           {/* <RenderField
             label="Production"
@@ -193,6 +202,7 @@ const FilmPage = () => {
             onFieldChange={handleFieldChange}
           /> */}
         </div>
+        <SnackbarComponent/>
       </div>
     </div>
   );

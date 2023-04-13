@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import style from './FilmPage.module.css'
+import PropTypes from 'prop-types'
 
-const RenderField = ({ label, value, isEditing, onFieldChange,field,touched,errors}) => {
+const RenderField = ({ label, value, isEditing, onFieldChange}) => {
     const [inputValue, setInputValue] = useState(value);
 
     const handleInputChange = (event) => {
@@ -15,16 +16,21 @@ const RenderField = ({ label, value, isEditing, onFieldChange,field,touched,erro
             <p>{label}</p>
             {
                 isEditing ? (
-                    <div>
-                        <input value={inputValue} onChange={handleInputChange} {...field}/>
-                    {/* {errors[field.Production] && touched[field.Production] && (<div>{errors[field.Production]}</div>)} */}
-                    </div>
+                        <input value={inputValue} onChange={handleInputChange}/>
+                    // {/* {errors[field.Production] && touched[field.Production] && (<div>{errors[field.Production]}</div>)} */}
                 ) : (
                     <p>{value}</p>
                 )
             }
             </div>
     );
+}
+
+RenderField.propTypes = {
+    label: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    isEditing: PropTypes.bool.isRequired,
+    onFieldChange: PropTypes.func.isRequired
 }
 
 export default RenderField;

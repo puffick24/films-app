@@ -1,4 +1,4 @@
-import React, { StrictMode } from 'react';
+import React from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import {Provider} from 'react-redux'
 
@@ -13,7 +13,6 @@ import { store } from '../store'
 const App = () => {
 
   return (
-    <StrictMode>
       <Provider store = {store}>
         <BrowserRouter>
           <div className={style.App}>
@@ -25,9 +24,7 @@ const App = () => {
             </Routes>
           </div>
         </BrowserRouter> 
-      </Provider>
-         
-    </StrictMode>     
+      </Provider>   
   );
 }
 

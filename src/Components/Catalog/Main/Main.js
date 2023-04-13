@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Pagination } from '@mui/material'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import style from './Main.module.css'
 
@@ -9,6 +9,8 @@ import Film from '../Film';
 import ModalDeleteConfirm from '../../ModalDeleteConfirm';
 import Spinner from '../../../images/Spinner'
 import { keys } from '../../../keys';
+import SnackbarComponent from '../../Snackbar/SnackbarComponent';
+import { addSnackTypeAction } from '../../store/SnackbarReducer';
 
 const Main = () => {
     const [films,setFilms] = useState([])
@@ -25,6 +27,16 @@ const Main = () => {
 
     const keysStore = useSelector(state => state.keysRemove.keys)
 
+    const store = useSelector(state => state.keysRemove.keys)
+    const dispatch = useDispatch()
+
+    const setSnackType = () => {
+        store.includes(filmID) ?
+            dispatch(addSnackTypeAction({severity: 'success', message: 'Movie deleted successfully'}))
+        :
+            dispatch(addSnackTypeAction({severity: 'error', message: 'Something went wrong...'}))
+    }
+
     const getFilms = async () => {
         try{
             setLoading(true)
@@ -33,6 +45,8 @@ const Main = () => {
 
             const newKeysState = keysState.filter((i) => !keysStore.includes(i))
             setKeysState(newKeysState)
+
+            setSnackType()
 
             const endpoints = newKeysState.slice(firstFilmIndex,lastFilmIndex)           
             const request = endpoints.map((endpoint) => axios.get(`http://www.omdbapi.com/?i=${endpoint}&apikey=fb59bcb5`))
@@ -84,11 +98,12 @@ const Main = () => {
                         key = {i}
                         getFilmIDHandle = {getFilmIDHandle}
                     />
-                ))             
+                ))          
             }
             </ul>
             <Pagination onChange = {handlePageChange} className={style.pagination} count = {pageNum} size = 'large' page = {currentFilmsPage}/>
-            <ModalDeleteConfirm active = {active} setModalActive = {setModalActive} filmID = {filmID}/> 
+            <ModalDeleteConfirm active = {active} setModalActive = {setModalActive} filmID = {filmID}/>
+            <SnackbarComponent/>
         </main>
     )
 }
