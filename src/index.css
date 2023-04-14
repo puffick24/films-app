@@ -1,6 +1,7 @@
 :root{
     --bg-color:#3C3C3C;
     --theme-color: #45A29E;
+    --disabled-theme-color: #6FBCB9;
 }
 
 html{
